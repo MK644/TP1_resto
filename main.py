@@ -1,4 +1,4 @@
-from enum import verify
+m enum import verify
 from tkinter import *
 import random
 from PIL import ImageTk, Image
@@ -132,6 +132,8 @@ def menu():
 ###########################################################
 # service
 ###########################################################
+
+
 def reset(bouton):
     bouton["bg"] = "light grey"
     bouton["relief"] = RAISED
@@ -142,34 +144,126 @@ def selectionner(bouton):
     bouton["bg"]="lightgreen"
     bouton["relief"] = FLAT
     bouton["state"] = DISABLED
-def Bouton0():
-    selectionner(Bouton0)
-    l2=l.copy()
-    l2.remove(Bouton0)
-    for b in l2:
-        reset(b)
+
+
 def Bouton1():
+    global note1
     selectionner(Bouton1)
-    l2 = l.copy()
-    l2.remove(Bouton1)
+    reset(Bouton2)
+    Bouton3.place(relx=0.65, rely=0.37, anchor=CENTER)
+    Bouton4.place(relx=0.8, rely=0.37, anchor=CENTER)
+    note1=canvas.create_text(100, 80, text="Soupe à l'oignon")
+    try:
+        canvas.delete(note2)
+    except:
+        pass
+def Bouton2():
+    global note2
+    selectionner(Bouton2)
+    reset(Bouton1)
+    reset(Bouton3)
+    reset(Bouton4)
+    Bouton3.place_forget()
+    Bouton4.place_forget()
+    note2=canvas.create_text(100, 80, text="Croquettes de thon")
+    try:
+        canvas.delete(note1)
+    except:
+        pass
+    try:
+        canvas.delete(note3)
+    except:
+        pass
+    try:
+        canvas.delete(note4)
+    except:
+        pass
 
-    for b in l2:
-        reset(b)
-    Bouton2 = Button(fenetre3, text="croquette", width=11, foreground="black", background="light grey",command=Bouton1 )
+def Bouton3():
+    global note3
+    selectionner(Bouton3)
+    reset(Bouton4)
+    note3=canvas.create_text(100, 100, text="Gratinée")
+    try:
+        canvas.delete(note4)
+    except:
+        pass
 
-    Bouton3 = Button(fenetre3, text="croquette", width=11, foreground="black", background="light grey", command=Bouton1)
+def Bouton4():
+    global note4
+    selectionner(Bouton4)
+    reset(Bouton3)
+    note4=canvas.create_text(100, 100, text="Pas gratiné")
+    try:
+        canvas.delete(note3)
+    except:
+        pass
+def Bouton5():
+    global note5
+    selectionner(Bouton5)
+    reset(Bouton6)
+    note5=canvas.create_text(100, 170, text="Poisson avec pommes de terre")
+    try:
+        canvas.delete(note6)
+    except:
+        pass
+def Bouton6():
+    global note6
+    selectionner(Bouton6)
+    reset(Bouton5)
+    note6=canvas.create_text(100, 170, text="Steak avec légumes du jardin")
+    try:
+        canvas.delete(note5)
+    except:
+        pass
 
+def Bouton7():
+    global note7
+    selectionner(Bouton7)
+    reset(Bouton8)
+    note7=canvas.create_text(100, 240, text="Café")
+    try:
+        canvas.delete(note8)
+    except:
+        pass
+
+def Bouton8():
+    global note8
+    selectionner(Bouton8)
+    reset(Bouton7)
+    note8=canvas.create_text(100, 240, text="Un quart de gâteau au fromage")
+    try:
+        canvas.delete(note7)
+    except:
+        pass
 
 def service():
-    global fenetre3, Bouton0, Bouton1, l
+    global fenetre3, \
+        Bouton1, Bouton2, Bouton3, Bouton4, Bouton5, Bouton6, Bouton7, Bouton8,\
+        note1, note2, note3, note4, note5, note6, note7, note8,\
+        canvas
+
     fenetre3=  Toplevel(fenetre)
     fenetre3.title("Service")
     fenetre3.geometry("700x500")
-    Bouton0 = Button(fenetre3, text="soupe", width=11, foreground="black", background="light grey", command=Bouton0 )
-    Bouton1 = Button(fenetre3, text="croquette", width=11, foreground="black", background="light grey",command=Bouton1 )
-    Bouton1.place(relx=0.8, rely=0.3, anchor=CENTER)
-    Bouton0.place(relx=0.7, rely=0.3, anchor=CENTER)
-    l=[Bouton0, Bouton1]
+    Bouton1 = Button(fenetre3, text="Soupe", width=11, foreground="black", background="light grey", command=Bouton1 )
+    Bouton2 = Button(fenetre3, text="Croquette", width=11, foreground="black", background="light grey",command=Bouton2 )
+    Bouton3 = Button(fenetre3, text="Gratiner", width=11, foreground="black", background="light grey", command=Bouton3)
+    Bouton4 = Button(fenetre3, text="Pas gratiner", width=11, foreground="black", background="light grey", command=Bouton4)
+    Bouton5 = Button(fenetre3, text="Poisson", width=11, foreground="black", background="light grey", command=Bouton5)
+    Bouton6 =  Button(fenetre3, text="Steak", width=11, foreground="black", background="light grey", command=Bouton6)
+    Bouton7 = Button(fenetre3, text="Café", width=11, foreground="black", background="light grey", command=Bouton7)
+    Bouton8 = Button(fenetre3, text="gâteau", width=11, foreground="black", background="light grey", command=Bouton8)
+
+    Bouton1.place(relx=0.65, rely=0.3, anchor=CENTER)
+    Bouton2.place(relx=0.8, rely=0.3, anchor=CENTER)
+    Bouton5.place(relx=0.65, rely=0.45, anchor=CENTER)
+    Bouton6.place(relx=0.8, rely=0.45, anchor=CENTER)
+    Bouton7.place(relx=0.65, rely=0.55, anchor=CENTER)
+    Bouton8.place(relx=0.8, rely=0.55, anchor=CENTER)
+
+
+
 
     # IMAGE
     canvas = Canvas(fenetre3, width=200, height=460, highlightthickness=0)
@@ -184,6 +278,8 @@ def service():
     canvas.note = note
 
     fenetre3.mainloop()
+
+
 
 ###########################################################
 # repas a table

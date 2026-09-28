@@ -329,3 +329,5 @@ def repas():
 #nom = input("Nom: ")
 #prenom = input("Prenom: ")
 repas()
+anvas2.create_oval(50, 50, 450, 450, fill="white")
+canvas2.create_oval(90, 90, 410, 410, fill="white")

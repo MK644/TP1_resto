@@ -1,4 +1,4 @@
-m enum import verify
+from enum import verify
 from tkinter import *
 import random
 from PIL import ImageTk, Image
@@ -17,9 +17,9 @@ def reservation():
 
     fenetre.deiconify()
     fenetre.title("répétition...")
-    fenetre.geometry("500x340")
-    fenetre.minsize(500, 340)
-    fenetre.maxsize(500, 340)
+    fenetre.geometry("500x500")
+    fenetre.minsize(500, 500)
+    fenetre.maxsize(500, 500)
 
     mon_canevas = Canvas(fenetre, width=500, height=500)
 
@@ -109,22 +109,22 @@ def menu():
     global fenetre2
     fenetre2 =  Toplevel(fenetre) # nouvelle fenêtre
     fenetre2.title("Installation")
-    fenetre2.geometry("300x500")
-    Label(fenetre2, text="Entrées au choix").pack(pady=20)
+    fenetre2.geometry("500x500")
+    Label(fenetre2, text="Entrées au choix", font=("Arial", 11)).pack(pady=20)
     Label(fenetre2, text="1. Soupe à l'oignon non gratinée : 7,50 $").pack()
     Label(fenetre2, text="   Gratinée : +2,00 $").pack()
     Label(fenetre2, text="2. Croquettes de thon : 9,00 $").pack(pady=20)
 
-    Label(fenetre2, text="Repas au choix").pack(pady=20)
-    Label(fenetre2, text="1. Poisson avec pommes de terre : 22,00 $").pack()
+    Label(fenetre2, text="Repas au choix", font=("Arial", 11)).pack(pady=20)
+    Label(fenetre2, text="1. Poisson avec pommes de terre : 22,00 $", ).pack()
     Label(fenetre2, text="2. Steak avec légumes du jardin : 28,00 $").pack(pady=20)
 
-    Label(fenetre2, text="Desserts au choix").pack(pady=20)
+    Label(fenetre2, text="Desserts au choix", font=("Arial", 11)).pack(pady=20)
     Label(fenetre2, text="1. Café : 3,00 $").pack()
-    Label(fenetre2, text="2. Un quart de gâteau au fromage : 7,00 $").pack()
+    Label(fenetre2, text="2. Un quart de gâteau au fromage : 7,00 $").pack(pady=20)
 
     Bouton3 = Button(fenetre2, text="commander", width=11, foreground="black", background="lightgrey", command=commander)
-    Bouton3.place(relx=0.5, rely=0.9, anchor=CENTER)
+    Bouton3.place(relx=0.5, rely=0.95, anchor=CENTER)
 
     fenetre2.mainloop()
 
@@ -236,24 +236,35 @@ def Bouton8():
         canvas.delete(note7)
     except:
         pass
+def Bouton9():
+    global listcommande
+    listcommande=[]
+    for bouton in listbouton:
+        if bouton.cget("state")==DISABLED:
+            listcommande.append(bouton.cget("text"))
+    repas()
+
 
 def service():
+    fenetre2.destroy()
     global fenetre3, \
-        Bouton1, Bouton2, Bouton3, Bouton4, Bouton5, Bouton6, Bouton7, Bouton8,\
+        Bouton1, Bouton2, Bouton3, Bouton4, Bouton5, Bouton6, Bouton7, Bouton8, Bouton9 ,\
         note1, note2, note3, note4, note5, note6, note7, note8,\
+        listbouton,\
         canvas
 
     fenetre3=  Toplevel(fenetre)
     fenetre3.title("Service")
-    fenetre3.geometry("700x500")
-    Bouton1 = Button(fenetre3, text="Soupe", width=11, foreground="black", background="light grey", command=Bouton1 )
-    Bouton2 = Button(fenetre3, text="Croquette", width=11, foreground="black", background="light grey",command=Bouton2 )
-    Bouton3 = Button(fenetre3, text="Gratiner", width=11, foreground="black", background="light grey", command=Bouton3)
-    Bouton4 = Button(fenetre3, text="Pas gratiner", width=11, foreground="black", background="light grey", command=Bouton4)
-    Bouton5 = Button(fenetre3, text="Poisson", width=11, foreground="black", background="light grey", command=Bouton5)
-    Bouton6 =  Button(fenetre3, text="Steak", width=11, foreground="black", background="light grey", command=Bouton6)
-    Bouton7 = Button(fenetre3, text="Café", width=11, foreground="black", background="light grey", command=Bouton7)
-    Bouton8 = Button(fenetre3, text="gâteau", width=11, foreground="black", background="light grey", command=Bouton8)
+    fenetre3.geometry("500x500")
+    Bouton1 = Button(fenetre3, text="Soupe", width=8, foreground="black", background="light grey", command=Bouton1 )
+    Bouton2 = Button(fenetre3, text="Croquette", width=8, foreground="black", background="light grey",command=Bouton2 )
+    Bouton3 = Button(fenetre3, text="Gratiner", width=8, foreground="black", background="light grey", command=Bouton3)
+    Bouton4 = Button(fenetre3, text="Pas gratiner", width=8, foreground="black", background="light grey", command=Bouton4)
+    Bouton5 = Button(fenetre3, text="Poisson", width=8, foreground="black", background="light grey", command=Bouton5)
+    Bouton6 =  Button(fenetre3, text="Steak", width=8, foreground="black", background="light grey", command=Bouton6)
+    Bouton7 = Button(fenetre3, text="Café", width=8, foreground="black", background="light grey", command=Bouton7)
+    Bouton8 = Button(fenetre3, text="gâteau", width=8, foreground="black", background="light grey", command=Bouton8)
+    Bouton9 = Button(fenetre3, text="Servir", width=11, foreground="black", background="light grey", command=Bouton9)
 
     Bouton1.place(relx=0.65, rely=0.3, anchor=CENTER)
     Bouton2.place(relx=0.8, rely=0.3, anchor=CENTER)
@@ -261,8 +272,8 @@ def service():
     Bouton6.place(relx=0.8, rely=0.45, anchor=CENTER)
     Bouton7.place(relx=0.65, rely=0.55, anchor=CENTER)
     Bouton8.place(relx=0.8, rely=0.55, anchor=CENTER)
-
-
+    Bouton9.place(relx=0.85, rely=0.85, anchor=CENTER)
+    listbouton = [Bouton1, Bouton2, Bouton3, Bouton4, Bouton5, Bouton6, Bouton7, Bouton8]
 
 
     # IMAGE
@@ -286,6 +297,22 @@ def service():
 ###########################################################
 
 # (à venir : présentation de l'entrée/repas/dessert avec formes géométriques)
+def repas():
+    fenetre3.destroy()
+    fenetre4 = Toplevel(fenetre)
+    fenetre4.title("Repas")
+    fenetre4.geometry("500x500")
+    canvas = Canvas(fenetre4, width=500, height=500, bg="white")
+    canvas.pack()
+    if listcommande[0]=="Soupe":
+        canvas.create_oval(50,50 , 450, 450, fill="saddlebrown")
+        canvas.create_oval(70,70 , 430, 430, fill="beige")
+        canvas.create_arc(100, 100, 250, 250, fill="burlywood", style= "chord")
+        canvas.create_arc(80, 200, 230, 350, fill="burlywood", style= "chord")
+        canvas.create_arc(70, 300, 220, 450, fill="burlywood", style= "chord")
+        canvas.create_arc(200, 250, 350, 400, fill="burlywood", style= "chord")
+
+    fenetre4.mainloop()
 
 
 ###########################################################
@@ -301,4 +328,4 @@ def service():
 
 #nom = input("Nom: ")
 #prenom = input("Prenom: ")
-service()
+repas()

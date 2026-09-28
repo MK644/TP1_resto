@@ -555,7 +555,7 @@ def argent(montant):
 
 def facture():
     pygame.init()
-    ecran = pygame.display.set_mode((300, 520))
+    ecran = pygame.display.set_mode((500, 500))
     pygame.display.set_caption("Facture")
     
     # Polices style ticket (la première trouvée sur ton ordi sera utilisée)
@@ -613,7 +613,7 @@ def facture():
         y = 60
         for commande in listecommande:
             if commande == "Soupe":
-                prix = 7.5
+                prix = 7.50
             if commande == "Gratiné":
                 prix = 2
             if commande == "Croquette":
@@ -634,31 +634,32 @@ def facture():
         y += 6
         texte("SOUS-TOTAL", 60, y)
         texte_droite(argent(soustotal), y)
-        y += 34
+        y += 25
         texte("TPS", 60, y)
         texte_droite(argent(tps), y)
-        y += 30
+        y += 20
         texte("TVQ", 60, y)
         texte_droite(argent(tvq), y)
     
-        y += 40
+        y += 30
         texte("TOTAL", 30, y, gras)
         texte_droite(argent(total), y, gras)
     
-        y += 50
+        y += 40
         texte(f"Heure : {heure}", 50, y)
     
-        y += 40
+        y += 30
         texte("TPS : 000000000 RT0001", 50, y)
-        texte("TVQ : 000000000 TQ0001", 50, y + 22)
+        texte("TVQ : 000000000 TQ0001", 50, y + 15)
     
-        y += 60
+        y += 50
         texte("VOUS AVEZ ÉTÉ SERVI", 50, y)
-        texte("PAR : " + serveur, 80, y + 22)
+        texte("PAR : " + serveur, 80, y + 15)
     
         pygame.display.flip()
     
-    pygame.quit()
-
-
-
+        pygame.quit()
+        pygame.quit()
+    
+    
+    

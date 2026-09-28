@@ -489,6 +489,50 @@ def repas():
         etapes.append(lambda: gateau(canvas2))
 
     etape_actuelle = 0
+def Soupe():
+    canvas2.create_oval(50, 50, 450, 450, fill="saddlebrown")
+    canvas2.create_oval(70, 70, 430, 430, fill="beige")
+    canvas2.create_arc(100, 100, 250, 250, fill="burlywood", style="chord")
+    canvas2.create_arc(80, 200, 230, 350, fill="burlywood", style="chord")
+    canvas2.create_arc(70, 300, 220, 450, fill="burlywood", style="chord")
+    canvas2.create_arc(200, 250, 350, 400, fill="burlywood", style="chord")
+    if listcommande[1] == "Gratiné":
+        canvas2.create_rectangle(95, 180, 110, 260, fill="wheat")
+        canvas2.create_rectangle(150, 110, 165, 190, fill="wheat")
+        canvas2.create_rectangle(242, 90, 257, 170, fill="wheat")
+        canvas2.create_rectangle(335, 110, 350, 190, fill="wheat")
+        canvas2.create_rectangle(380, 200, 395, 280, fill="wheat")
+        canvas2.create_rectangle(300, 270, 315, 350, fill="wheat")
+        canvas2.create_rectangle(210, 300, 225, 380, fill="wheat")
+        canvas2.create_rectangle(130, 270, 145, 350, fill="wheat")
+        canvas2.create_rectangle(220, 190, 235, 270, fill="wheat")
+def Poison():
+    canvas2.create_oval(50, 50, 450, 450, fill="white")
+    canvas2.create_oval(90, 90, 410, 410, fill="white")
+    canvas2.create_oval(100, 180, 200, 320, fill="#7b3b21", outline="#4a1f10", width=3)
+
+    # Marques de grill
+    canvas2.create_line(120, 205, 180, 215, fill="#3a180b", width=4)
+    canvas2.create_line(115, 240, 185, 250, fill="#3a180b", width=4)
+    canvas2.create_line(120, 275, 180, 285, fill="#3a180b", width=4)
+    # Carottes (cercles orange)
+    canvas2.create_oval(270, 110, 310, 150, fill="orange", outline="darkorange", width=2)
+    canvas2.create_oval(320, 130, 360, 170, fill="orange", outline="darkorange", width=2)
+    canvas2.create_oval(220, 80, 260, 120, fill="orange", outline="darkorange", width=2)
+    canvas2.create_oval(380, 180, 420, 220, fill="orange", outline="darkorange", width=2)
+    canvas2.create_oval(270, 170, 310, 210, fill="orange", outline="darkorange", width=2)
+    canvas2.create_oval(330, 200, 370, 240, fill="orange", outline="darkorange", width=2)
+    canvas2.create_oval(375, 225, 415, 265, fill="orange", outline="darkorange", width=2)
+    canvas2.create_oval(270, 230, 310, 270, fill="orange", outline="darkorange", width=2)
+    canvas2.create_oval(320, 245, 360, 285, fill="orange", outline="darkorange", width=2)
+
+    # Haricots (rectangles verts)
+    canvas2.create_rectangle(270, 290, 400, 302, fill="green", outline="darkgreen")
+    canvas2.create_rectangle(260, 310, 390, 322, fill="green", outline="darkgreen")
+    canvas2.create_rectangle(230, 340, 350, 352, fill="green", outline="darkgreen")
+    canvas2.create_rectangle(220, 360, 360, 372, fill="green", outline="darkgreen")
+    canvas2.create_rectangle(200, 380, 330, 392, fill="green", outline="darkgreen")
+    canvas2.create_rectangle(210, 400, 300, 412, fill="green", outline="darkgreen")
     afficher_plat()   # premier plat (l'entrée)
 
 

@@ -3,6 +3,8 @@ from tkinter import *
 import random
 import math
 from PIL import ImageTk, Image
+import pygame
+
 
 ###########################################################
 # réservation
@@ -551,47 +553,112 @@ noms_facture = {"Soupe": "Soupe à l'oignon", "Gratiner": "   Gratinée (extra)"
 def argent(montant):
     return f"{montant:.2f}".replace(".", ",") + " $"
 
-
 def facture():
-    fenetre5 = Toplevel(fenetre)
-    fenetre5.title("Facture")
-    fenetre5.geometry("500x500")
-    fenetre5.protocol("WM_DELETE_WINDOW", fenetre.destroy)
+    pygame.init()
+    ecran = pygame.display.set_mode((300, 520))
+    pygame.display.set_caption("Facture")
+    
+    # Polices style ticket (la première trouvée sur ton ordi sera utilisée)
+    police = pygame.font.SysFont("couriernew,consolas,courier", 18)
+    gras = pygame.font.SysFont("couriernew,consolas,courier", 26, bold=True)
+    
+    listeserveur = ["Aziz", "Thomas", "Racim", "Régis"]
+    
+    serveur = random.choice(listeserveur)
+    table = random.randint(1, 20)
+    soustotal = 0
+    
+    for commande in listecommande:
+        if commande == "Soupe":
+            soustotal += 7.5
+        if commande == "Gratiné":
+            soustotal += 2
+        if commande == "Croquette":
+            soustotal += 9
+        if commande == "Steak":
+            soustotal += 28
+        if commande == "Poisson:":
+            soustotal += 22
+        if commande == "Gâteau":
+            soustotal += 7
+        if commande == "Café":
+            soustotal += 3
+    
+    
+    tps = soustotal * 0.05
+    tvq = soustotal * 0.10      # TPS + TVQ = 15 %
+    total = soustotal * 1.15
+    
+    def argent(m):
+        return f"{m:.2f}".replace(".", ",") + " $"
+    
+    def texte(t, x, y, f=police):
+        ecran.blit(f.render(t, True, "black"), (x, y))
+    
+    def texte_droite(t, y, f=police):
+        surface = f.render(t, True, "black")
+        ecran.blit(surface, (270 - surface.get_width(), y))
+    
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+    
+        ecran.fill("white")
+    
+        texte(f"TABLE N°{table}", 90, 15)
+    
+        # Les 4 articles
+        y = 60
+        for commande in listecommande:
+            if commande == "Soupe":
+                prix = 7.5
+            if commande == "Gratiné":
+                prix = 2
+            if commande == "Croquette":
+                prix = 9
+            if commande == "Steak":
+                prix = 28
+            if commande == "Poisson:":
+                prix = 22
+            if commande == "Gâteau":
+                prix = 7
+            if commande == "Café":
+                prix = 3
+    
+            texte("1 " + commande, 30, y)
+            texte_droite(argent(prix), y)
+            y += 24
+    
+        y += 6
+        texte("SOUS-TOTAL", 60, y)
+        texte_droite(argent(soustotal), y)
+        y += 34
+        texte("TPS", 60, y)
+        texte_droite(argent(tps), y)
+        y += 30
+        texte("TVQ", 60, y)
+        texte_droite(argent(tvq), y)
+    
+        y += 40
+        texte("TOTAL", 30, y, gras)
+        texte_droite(argent(total), y, gras)
+    
+        y += 50
+        texte(f"Heure : {heure}", 50, y)
+    
+        y += 40
+        texte("TPS : 000000000 RT0001", 50, y)
+        texte("TVQ : 000000000 TQ0001", 50, y + 22)
+    
+        y += 60
+        texte("VOUS AVEZ ÉTÉ SERVI", 50, y)
+        texte("PAR : " + serveur, 80, y + 22)
+    
+        pygame.display.flip()
+    
+    pygame.quit()
 
-    Label(fenetre5, text="FACTURE", font=("Arial", 14, "bold")).pack(pady=20)
-
-    lignes = Frame(fenetre5)
-    lignes.pack(padx=40, fill=X)
-    total = 0
-    rang = 0
-    for article in ["Soupe", "Gratiner", "Croquette", "Poisson", "Steak", "Café", "gâteau"]:
-        if article in listcommande:
-            Label(lignes, text=noms_facture[article]).grid(row=rang, column=0, sticky=W, pady=3)
-            Label(lignes, text=argent(prix[article])).grid(row=rang, column=1, sticky=E, pady=3)
-            total += prix[article]
-            rang += 1
-    lignes.columnconfigure(0, weight=1)
-
-    Label(fenetre5, text="_" * 50).pack(pady=(10, 0))
-    Label(fenetre5, text="Total : " + argent(total), font=("Arial", 12, "bold")).pack(pady=10)
-    Label(fenetre5, text="Merci de votre visite !").pack(pady=20)
-    Button(fenetre5, text="QUITTER", width=11, foreground="black", background="light grey",
-           command=fenetre.destroy).place(relx=0.5, rely=0.95, anchor=CENTER)
 
 
-###########################################################
-# Lancement du programme
-###########################################################
-
-TEST = False   # True = ouvre seulement la fenêtre repas (sans réservation) / False = programme normal
-
-if TEST:
-    # fausse commande pour tester : change la liste comme tu veux
-    listcommande = ["Soupe", "Gratiner", "Poisson", "Café"]
-    # autres exemples : ["Croquette", "Steak", "gâteau"]  /  ["Soupe", "Pas gratiner", "Steak", "gâteau"]
-    repas()
-    fenetre.mainloop()
-else:
-    nom = input("Nom: ")
-    prenom = input("Prenom: ")
-    reservation()

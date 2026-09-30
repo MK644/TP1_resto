@@ -1,3 +1,4 @@
+#Mika, Racim, Elliot, Olivier
 from tkinter import *
 import tkinter.font as tkfont
 import random
